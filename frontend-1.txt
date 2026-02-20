@@ -1,0 +1,111 @@
+Frontend Design and Architecture Specification: AIOmni
+Framework: Next.js (App Router)
+Styling: Tailwind CSS, next-themes (for dark mode support)
+Typography: "Outfit" (Primary sans-serif)
+
+1. Global Design Language & Theme
+The application utilizes a sleek, modern, data-dense aesthetic optimized for prolonged usage. The default state is a deep, immersive dark mode.
+
+Color Palette (Dark Theme):
+
+Background: Deep Navy/Charcoal (e.g., Tailwind slate-950 or a custom #0B1120). Avoid pure black.
+
+Surface/Cards: Slightly lighter deep blue (e.g., slate-900) to create elevation without relying heavily on borders.
+
+Accents & Gradients: The primary brand elements and active states should use a vibrant Dark Blue to Purple gradient (e.g., fading from #3B82F6 to #8B5CF6).
+
+Semantic Status Colors:
+
+Healthy/Verified: Emerald Green.
+
+Warnings/Issues: Amber/Yellow.
+
+Critical/Absent: Rose/Red.
+
+Informational: Muted Cyan or Blue.
+
+Typography: The entire application uses the Outfit font. Weights should range from 300 (light data points) to 600/700 (headers and metric callouts).
+
+Shapes & Borders:
+
+Avoid harsh, boxy lines. Elements should feel fluid and modern.
+
+Apply generous border radii (rounded-xl or rounded-2xl) to all cards, buttons, and input fields.
+
+Use subtle, colored drop-shadows or inner glows on primary action buttons or high-score metrics to make them "pop" against the dark background.
+
+2. Global Layout Structure
+The application follows a classic B2B SaaS layout , maximizing screen real estate for data visualization.
+
+A. The Sidebar (Left Navigation)
+Style: Fixed to the left side, taking up roughly 240px-280px of width. Background matches the global app background but separated by a very subtle, low-opacity right border.
+
+Header: AIOmni logo paired with an "AI Visibility" sub-badge. Below this, a workspace/entity switcher dropdown (e.g., switching between "Canal Restaurant" and other clients).
+
+Navigation Links: Vertical list with rounded hover states. Active states should be highlighted with a subtle background tint and a left-aligned colored accent bar.
+
+Sections: Overview, Entity Profile, Prompt Runner, Sources, Issues (with a notification badge), Reports, Clients, Exports.
+
+Footer: Fixed at the bottom of the sidebar, containing global Alerts, Settings, and the user's profile card (Avatar, Name, Plan type).
+
+B. The Top Header
+Style: Fixed at the top, spanning the width of the main content area. Background is translucent with a backdrop blur to ensure content scrolls smoothly underneath.
+
+Components:
+
+Global Search: A wide, pill-shaped search bar placed centrally or left-aligned, reading "Search prompts, issues, sources...".
+
+System Status: A small, pill-shaped badge on the right indicating system health (e.g., a green dot next to "All systems operational").
+
+Notifications: A bell icon with a notification dot on the far right.
+
+C. Main Content Area
+Style: The dynamic canvas where page components load. It features ample padding (e.g., p-6 or p-8) to give the data cards room to breathe.
+
+3. Key UI Components (Dashboard Elements)
+Metric Cards (Score Breakdown): Horizontal flex containers holding individual metric rings. The rings should be circular progress bars (SVG-based) displaying scores from 0-100, colored according to the semantic status (e.g., green for high scores, red for low).
+
+Trend Line Charts: Smooth, curving line charts (using a library like Recharts or Chart.js) tracking 10-week rolling averages. The lines should utilize the signature blue-to-purple gradient. Ensure the chart tooltips follow the dark theme styling.
+
+The "Source Graph" List: A vertical list of directory sources (Website, Google, Yelp, TripAdvisor). Each row should be a rounded card displaying a progress bar of citation rates, badge indicators for "Healthy" or "Issues", and pill-shaped tags showing extracted data like Hours and Phone numbers.
+
+Action Plan (Issues List): A stacked list of warnings. Each row must feature a clear severity icon (critical/warning), a bold title, a brief explanation, and action buttons (e.g., "Open", "Fixed") styled as pill-shaped badges.
+
+Prompt Runner Table: A data table without vertical grid lines. Use ample row padding. Columns include: Prompt, Provider (e.g., ChatGPT, Gemini), and status checkmarks/crosses indicating if the brand was mentioned, cited, or recommended.
+
+4. Next.js Codebase Structure (App Router)
+To keep the frontend highly modular, scalable, and easy to navigate, structure the Next.js src or root directory as follows:
+
+app/: Contains the routing logic.
+
+layout.tsx: The root layout handling the HTML shell, the <ThemeProvider> for dark mode, and global the "Outfit" font loading.
+
+(dashboard)/: A Route Group to encapsulate the authenticated SaaS experience without adding to the URL path.
+
+layout.tsx: Contains the Sidebar and Top Header components.
+
+overview/page.tsx: The main dashboard view.
+
+entity-profile/page.tsx: The canonical truth record view.
+
+issues/page.tsx: The action plan list.
+
+components/: All reusable UI assets.
+
+ui/: Base, atomic components (e.g., Buttons, Inputs, Cards, Badges, CircularProgress, LineChart). These should strictly adhere to the rounded, dark-theme guidelines.
+
+layout/: Structural components like Sidebar, TopNav, and UserMenu.
+
+dashboard/: Complex, composition components specifically for the views (e.g., VisibilityScoreCard, SourceGraphList, PromptRunnerTable).
+
+styles/:
+
+globals.css: Tailwind imports and raw CSS variables defining the deep navy backgrounds and primary gradient hex codes.
+
+lib/:
+
+Utility functions, such as class merging utilities (e.g., cn for Tailwind) to handle conditional styling cleanly.
+
+types/:
+
+TypeScript interfaces defining the shape of Entity, PromptResult, and Issue to ensure type safety across the dashboard.

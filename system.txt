@@ -1,0 +1,58 @@
+Project Blueprint: AIOmni – Generative Engine Optimization (GEO) SaaS
+1. Vision and Objective
+AIOmni is a B2B SaaS platform designed to help businesses and marketing agencies monitor, manage, and optimize their brand presence across Large Language Models (LLMs) and AI search engines (e.g., ChatGPT, Perplexity, Claude, Gemini).
+
+While traditional SEO focuses on ranking web pages via search engine crawlers, AIOmni focuses on Generative Engine Optimization (GEO). The platform ensures that when users ask AI chatbots about a specific industry, product, or local business, the AI provides accurate, consistent information and cites the business correctly.
+
+2. The Core Problem
+LLMs construct answers dynamically and rely heavily on data consistency, "entity truth," and structured schema across the web. If a business has conflicting opening hours on Yelp versus its website, or lacks proper schema markup, AI models will hallucinate the answer, provide a competitor's information, or omit the business entirely due to low confidence. Businesses currently have no way to track their "AI Share of Voice" or know what these models are saying about them.
+
+3. Technology Stack Architecture
+To ensure scalability, background processing, and a highly interactive user experience, the system will be built using the following stack:
+
+Backend Core & API (Laravel): Laravel will serve as the primary backend architecture. It will handle user authentication, multi-tenancy (for agencies managing multiple clients), RESTful API routing, and complex relational database management (PostgreSQL or MySQL). Laravel Horizon paired with Redis will manage the heavy background job queues required for web scraping and API polling.
+
+Frontend SPA (React): The user-facing application will be a React-based Single Page Application. It requires complex state management to handle dynamic dashboards, data tables, and real-time score updates.
+
+Scraping & Concurrency Microservice (Node.js): A dedicated Node.js service will be utilized for tasks requiring heavy asynchronous concurrency and headless browser automation. This service will run Puppeteer/Playwright to scrape third-party directories and manage long-polling streams to multiple LLM APIs.
+
+4. Core System Modules
+A. The "Entity Truth" Record
+Function: A centralized database profile where the business defines its absolute canonical facts (Exact Name, Brand Variants, Address, Phone Number, Operating Hours, Menu/Services).
+
+Purpose: This serves as the baseline "truth" that the system uses to grade all external data sources and AI responses.
+
+B. Prompt Runner Engine
+Function: An automated testing suite that fires predefined, customizable prompts at various AI provider APIs (OpenAI, Anthropic, Perplexity, Google).
+
+Prompt Types: * Brand Prompts: "What are the opening hours of [Brand Name]?"
+
+Discovery Prompts: "What are the best Lebanese restaurants in [Neighborhood]?"
+
+Evaluation: The system analyzes the AI's response text against the Entity Truth Record to determine: Was the brand mentioned? Was the data accurate? Was the website cited?
+
+C. Source Graph & Crawler
+Function: A web scraping module that monitors the business's own website and third-party directories (Google Business Profile, TripAdvisor, Yelp, TrustRadius).
+
+Detection: It looks for missing JSON-LD schema, broken links, unreadable PDFs (like PDF-only menus), and data that conflicts with the Entity Truth Record.
+
+D. Scoring & Analytics Dashboard
+Function: Aggregates data to calculate an overall "AI Visibility Score."
+
+Metrics Tracked: Mention Rate, Citation Share, Accuracy Score, and 10-week rolling trend lines to visualize improvements over time.
+
+E. The Action Plan (Issue Remediation)
+Function: The diagnostic output of the system. It cross-references crawler data with AI prompt failures to generate a prioritized, severity-based checklist.
+
+Example Issues: "Hours inconsistent between Website and Google Business Profile," "No structured schema found on the homepage," or "Phone number format inconsistent across 6 directories."
+
+5. Instructions for the AI IDE / Agent
+When generating the codebase for this project, adhere to the following architectural guidelines:
+
+Prioritize modularity. The LLM API integrations (OpenAI, Claude, etc.) must follow a factory or interface pattern within Laravel/Node.js so new AI providers can be added easily without rewriting the core prompt runner logic.
+
+Assume all interactions with external APIs and scrapers are slow. Never block the main thread or user requests; heavily utilize Laravel's queue system for these operations.
+
+Ensure the database schema supports multi-tenancy from day one, allowing "Agency" users to seamlessly switch between different "Client/Entity" profiles.
+
+Build the React frontend using a robust component library to efficiently handle the dense data visualizations (charts, metric cards, status tables) required by the dashboard.

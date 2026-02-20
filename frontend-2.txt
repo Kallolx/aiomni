@@ -1,0 +1,106 @@
+Here is the continuation of the Frontend Design Specification. This section breaks down the specific UI layout and component structure for every individual route within the Next.js (dashboard) route group.
+
+You can append this directly to your AI IDE's context document so it understands exactly what to render on each page.
+
+5. Route-by-Route UI Specification
+All routes below reside within the app/(dashboard)/ directory. They all inherit the global layout (Sidebar on the left, Header on the top) and share the deep navy background (#0B1120), "Outfit" font, and rounded-2xl component styling.
+
+A. Overview (Main Dashboard)
+Route: /overview/page.tsx
+
+Layout Structure: A masonry-style dashboard designed for a quick, high-level snapshot.
+
+UI Elements:
+
+Top Row (Metrics): Four horizontal, highly-rounded cards. Each contains a specific metric (AI Visibility Score, Citation Rate, Data Accuracy, Active Issues). Use circular SVG progress rings for the scores, employing semantic colors (Green for good, Amber for warnings).
+
+Middle Section (Hero Chart): A wide card containing a line chart (via Recharts). The line tracks the "Visibility Score" over 10 weeks, using a thick stroke that leverages the signature Blue-to-Purple gradient. The area under the line should have a subtle, fading gradient fill.
+
+Bottom Row: Split into two columns. Left column: A "Recent Issues" feed (a compact list). Right column: A "Recent Prompts" mini-table showing the latest AI tests.
+
+B. Entity Profile
+Route: /entity-profile/page.tsx
+
+Layout Structure: A two-column layout optimized for heavy data entry, establishing the canonical "truth."
+
+UI Elements:
+
+Left Column (Sticky): A profile summary card containing the business logo placeholder, Business Name, and a progress bar indicating "Profile Completeness."
+
+Right Column (Forms): A vertically stacked series of form cards (Basic Info, Location & Hours, Menu/Services).
+
+Form Styling: Inputs must have floating labels. The input fields themselves should have a slightly lighter navy background than the main canvas, no harsh borders, and apply a subtle purple drop-shadow/glow when focused.
+
+C. Prompt Runner
+Route: /prompt-runner/page.tsx
+
+Layout Structure: An interactive control center above a dense data grid.
+
+UI Elements:
+
+Control Bar: A wide, pill-shaped sticky bar at the top. It contains a dropdown to select the target AI Provider (ChatGPT, Gemini, Claude), a text input for the custom prompt, and a vibrant, gradient-filled "Run Prompt" action button.
+
+Data Grid: A borderless table with generous row padding (py-4).
+
+Columns: Prompt Text, Provider Badge (e.g., a dark grey pill with the OpenAI logo), Date, and Status columns. The statuses (Brand Mentioned, Cited, Accurate) should be represented by solid, rounded icon badges (Checkmarks or X's).
+
+D. Sources
+Route: /sources/page.tsx
+
+Layout Structure: A responsive CSS Grid (2x2 or 3x3 depending on screen size).
+
+UI Elements:
+
+Source Cards: Each external directory (Google Business, Yelp, Client Website) gets a dedicated rounded-2xl card.
+
+Card Interiors: Top left holds the source logo. Top right holds a health badge (e.g., "In Sync" or "Action Needed"). The body of the card shows the exact data extracted from that source (e.g., a mini list showing the scraped hours and phone number) so the user can visually compare it to their Entity Profile.
+
+E. Issues (Action Plan)
+Route: /issues/page.tsx
+
+Layout Structure: A prioritized, vertically stacked list.
+
+UI Elements:
+
+Filter Tabs: A segmented control at the top to filter by "Critical," "Warnings," and "Resolved." Active tabs should have a bright blue background.
+
+Accordion List: Each issue is an expandable row. In its collapsed state, it shows a severity icon, the issue title (e.g., "Conflicting Hours on Yelp"), and the date discovered.
+
+Expanded State: When clicked, the row expands downwards on a smooth spring animation to reveal the specific conflict (e.g., "Entity Truth says 9 AM, Yelp says 10 AM") and a "Resolve" or "Ignore" button.
+
+F. Reports
+Route: /reports/page.tsx
+
+Layout Structure: An analytics hub heavily focused on visual data comparison.
+
+UI Elements:
+
+Date Picker: A prominent, rounded date-range picker at the top right.
+
+Visualizations: A grid of various chart components. Bar charts comparing how different LLMs perform against the brand, and pie charts breaking down the categories of open issues.
+
+Floating Action: A fixed button at the bottom right corner (gradient styling) labeled "Export PDF."
+
+G. Clients (Agency View)
+Route: /clients/page.tsx
+
+Layout Structure: A card grid layout for multi-tenant management.
+
+UI Elements:
+
+Client Cards: Clickable cards representing different businesses under management.
+
+Card Data: Business Name, overall AI Visibility Score (prominently displayed in a glowing circle), and a mini, simple sparkline chart showing if their score is trending up or down.
+
+Interactivity: Hovering over a client card should slightly lift the card upwards (-translate-y-1) and intensify its drop-shadow to indicate it is clickable.
+
+H. Exports
+Route: /exports/page.tsx
+
+Layout Structure: A simple, clean, historical log view.
+
+UI Elements:
+
+List View: Rows of previously generated reports.
+
+Columns: Generation Date, Report Name/Type, File Format (PDF/CSV pill badge), and a download icon button aligned to the right.
