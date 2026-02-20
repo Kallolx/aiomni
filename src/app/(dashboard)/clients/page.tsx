@@ -6,7 +6,7 @@ export default function ClientsPage() {
   const clients = [
     {
       id: 1,
-      name: "Canal Restaurant",
+      name: "Cornus Restaurant",
       score: 78,
       trend: "up" as const,
       sparkline: [65, 68, 70, 72, 75, 78],

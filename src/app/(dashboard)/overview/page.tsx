@@ -256,8 +256,8 @@ const trendData = [
           {/* Business Details */}
           <div className="space-y-1">
             <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-black tracking-tight text-white italic">
-                Canal Restaurant
+              <h1 className="text-3xl font-black tracking-tight text-white ">
+                Cornus Restaurant
               </h1>
               <Badge
                 variant="default"
@@ -271,7 +271,7 @@ const trendData = [
             <div className="flex flex-wrap items-center gap-y-1 gap-x-4">
               <div className="flex items-center gap-1.5 text-sm text-slate-400">
                 <MapPin className="h-4 w-4 text-blue-500/70" />
-                <span>Downtown Manhattan, NY</span>
+                <span>London, England</span>
               </div>
               <div className="flex items-center gap-1.5 text-sm font-medium text-amber-400">
                 <Star className="h-4 w-4 fill-amber-400" />
@@ -282,7 +282,7 @@ const trendData = [
                 className="flex items-center gap-1.5 text-sm text-blue-400 hover:text-blue-300 transition-colors font-medium"
               >
                 <ExternalLink className="h-4 w-4" />
-                <span>lamaisonmoderne.com</span>
+                <span>https://cornusrestaurant.co.uk/</span>
               </a>
             </div>
           </div>

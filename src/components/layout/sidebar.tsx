@@ -130,8 +130,8 @@ export function Sidebar({
               </div>
               {!isCollapsed && (
                 <div className="overflow-hidden whitespace-nowrap">
-                  <h1 className="text-xl font-bold">AIOmni</h1>
-                  <p className="text-xs text-slate-400">AI Visibility</p>
+                  <h1 className="text-xl font-bold">Wonder AI</h1>
+                  <p className="text-xs text-slate-400">AI Visibility Monitor</p>
                 </div>
               )}
             </div>
@@ -233,11 +233,12 @@ export function Sidebar({
               </div>
               {!isCollapsed && (
                 <div className="flex-1 min-w-0 overflow-hidden">
-                  <p className="text-sm font-medium truncate">John Doe</p>
+                  <p className="text-sm font-medium truncate">Jamil Ifat</p>
                   <p className="text-xs text-slate-400">Premium Plan</p>
                 </div>
               )}
             </div>
+              <p className="text-xs text-white pl-4">A Wonder Lab Production</p>
           </div>
         </div>
       </aside>

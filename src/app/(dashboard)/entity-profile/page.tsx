@@ -27,8 +27,8 @@ export default function EntityProfilePage() {
               CR
             </div>
             <div className="text-center">
-              <h3 className="font-bold text-lg">Canal Restaurant</h3>
-              <p className="text-sm text-slate-400 mt-1">Lebanese Cuisine</p>
+              <h3 className="font-bold text-lg">Cornus Restaurant</h3>
+              <p className="text-sm text-slate-400 mt-1">Michelin Starred</p>
               <Badge variant="success" className="mt-2 text-xs">Active</Badge>
             </div>
             
@@ -80,7 +80,7 @@ export default function EntityProfilePage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input label="Business Name" defaultValue="Canal Restaurant" required />
+                <Input label="Business Name" defaultValue="Cornus Restaurant" required />
                 <Input label="Business Type" defaultValue="Lebanese Restaurant" />
               </div>
               <Input 

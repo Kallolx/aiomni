@@ -11,7 +11,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "AIOmni - AI Visibility Platform",
+  title: "Wonder AI Visibility Platform",
   description: "Monitor, manage, and optimize your brand presence across LLMs and AI search engines",
 };
 
